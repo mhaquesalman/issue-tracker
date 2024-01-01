@@ -11,16 +11,28 @@ datasource db {
 }
 
 model Issue {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String   @db.Text
-  status      Status   @default(OPEN)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  title            String   @db.VarChar(255)
+  description      String   @db.Text
+  status           Status   @default(OPEN)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  assignedToUserId Int?     @db.Int
+  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
 }
 
 enum Status {
   OPEN
   IN_PROGRESS
   CLOSED
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  name           String   @default("") @db.VarChar(255)
+  email          String   @db.VarChar(255)
+  password       String   @db.VarChar(255)
+  jti            String?  @db.VarChar(255)
+  createdAt      DateTime @default(now())
+  assignedIssues Issue[]
 }

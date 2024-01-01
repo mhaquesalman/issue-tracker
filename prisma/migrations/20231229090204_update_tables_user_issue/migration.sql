@@ -1,0 +1,10 @@
+-- AlterTable
+ALTER TABLE `issue` ADD COLUMN `assignedToUserId` INTEGER NULL,
+    MODIFY `status` ENUM('OPEN', 'IN_PROGRESS', 'CLOSED') NOT NULL DEFAULT 'OPEN';
+
+-- AlterTable
+ALTER TABLE `user` ADD COLUMN `jti` VARCHAR(255) NULL,
+    ADD COLUMN `name` VARCHAR(255) NOT NULL DEFAULT '';
+
+-- AddForeignKey
+ALTER TABLE `Issue` ADD CONSTRAINT `Issue_assignedToUserId_fkey` FOREIGN KEY (`assignedToUserId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
