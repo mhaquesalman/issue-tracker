@@ -6,6 +6,7 @@ import { Flex, Grid } from "@radix-ui/themes";
 import IssueChart from "./IssueChart";
 import LatestIssues from "./LatestIssues";
 import { Metadata } from "next";
+import { revalidatePath } from "next/cache";
 
 const Authentication = dynamic(() => import("./provider/Authentication"), {
   ssr: false,
@@ -17,6 +18,7 @@ export default async function Home() {
     where: { status: "IN_PROGRESS" },
   });
   const close = await prisma.issue.count({ where: { status: "CLOSED" } });
+  revalidatePath("/");
 
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
@@ -29,7 +31,9 @@ export default async function Home() {
   );
 }
 
-export const metaData: Metadata = {
+// export const revalidate = 10;
+
+export const metadata: Metadata = {
   title: "Issue Tracker - Dashboard",
   description: "View a summary of project issues",
 };

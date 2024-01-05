@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, redirect } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Spinner from "@/app/components/Spinner";
 import delay from "delay";
@@ -25,6 +25,7 @@ const Login = () => {
     const signinData = {
       email: email,
       password: password,
+      callbackUrl: "/",
       redirect: false,
     };
 
@@ -45,10 +46,11 @@ const Login = () => {
   };
 
   if (status === "authenticated") {
-    if (!isAuthenticate()) {
-      authenticate(session.expires);
-    }
-    router.push("/");
+    // if (!isAuthenticate()) {
+    //   authenticate(session.expires);
+    // }
+    // router.push("/");
+    redirect("/");
   }
 
   return (

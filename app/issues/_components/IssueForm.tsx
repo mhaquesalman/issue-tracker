@@ -14,6 +14,7 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
 import { Issue } from "@prisma/client";
 import IssueStatusMenu from "./IssueStatusMenu";
+import { revalidatePath } from "next/cache";
 
 /* interface IssueForm {
     title: string;
@@ -66,7 +67,8 @@ const IssueForm = ({ issue }: Props) => {
       if (issue) await axios.patch("/api/issues/" + issue.id, data);
       else await axios.post("/api/issues", data);
       router.push("/issues");
-      // router.refresh();
+      router.refresh();
+      // revalidatePath("/issues");
       // alert(JSON.stringify(data));
     } catch (e) {
       setSubmitting(false);

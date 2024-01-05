@@ -38,7 +38,7 @@ const authOptions = {
       return true;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("jwt ", token);
+      // console.log("jwt ", token);
       if (user) {
         // passing id to the session via token
         token.id = user.id;

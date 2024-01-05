@@ -164,7 +164,7 @@ const Issues = async ({ searchParams }: Props) => {
 
 // export const revalidate = 0;
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: "Issue Tracker - Issue List",
   description: "View all project issues",
 };
