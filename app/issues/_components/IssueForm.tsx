@@ -110,7 +110,6 @@ const IssueForm = ({ issue }: Props) => {
             <Select.Root
               defaultValue={issue ? issue.status : undefined}
               onValueChange={field.onChange}
-              {...field}
             >
               <Select.Trigger placeholder="Select Status..." />
               <Select.Content>

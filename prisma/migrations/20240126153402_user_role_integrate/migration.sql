@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE `issue` MODIFY `status` ENUM('OPEN', 'IN_PROGRESS', 'CLOSED') NOT NULL DEFAULT 'OPEN';
+
+-- AlterTable
+ALTER TABLE `user` ADD COLUMN `role` VARCHAR(55) NOT NULL DEFAULT 'user',
+    MODIFY `name` VARCHAR(255) NOT NULL DEFAULT '';

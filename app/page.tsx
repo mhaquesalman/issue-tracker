@@ -18,7 +18,7 @@ export default async function Home() {
     where: { status: "IN_PROGRESS" },
   });
   const close = await prisma.issue.count({ where: { status: "CLOSED" } });
-  revalidatePath("/");
+  // revalidatePath("/");
 
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
@@ -31,7 +31,7 @@ export default async function Home() {
   );
 }
 
-// export const revalidate = 10;
+export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: "Issue Tracker - Dashboard",

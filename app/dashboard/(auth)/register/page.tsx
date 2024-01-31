@@ -14,6 +14,7 @@ const Register = () => {
   const handleSubmit: any = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const name = data.get("name");
     const email = data.get("email");
     const password = data.get("password");
     // console.log("regsiter email", email);
@@ -27,6 +28,7 @@ const Register = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          name: name,
           email: email,
           password: password,
         }),
@@ -66,6 +68,13 @@ const Register = () => {
         </span>
       )}
       <form className={styles.form} onSubmit={handleSubmit}>
+        <input
+          className={styles.input}
+          name="name"
+          type="text"
+          placeholder="Username"
+          required
+        />
         <input
           className={styles.input}
           name="email"

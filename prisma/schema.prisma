@@ -32,6 +32,7 @@ model User {
   name           String   @default("") @db.VarChar(255)
   email          String   @db.VarChar(255)
   password       String   @db.VarChar(255)
+  role           String   @default("user") @db.VarChar(55)
   jti            String?  @db.VarChar(255)
   createdAt      DateTime @default(now())
   assignedIssues Issue[]

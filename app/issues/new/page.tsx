@@ -11,10 +11,11 @@ const IssueForm = dynamic(() => import("@/app/issues/_components/IssueForm"), {
 const NewIssuePage = async () => {
   const auth = authOptions as NextAuthOptions;
   const session = await getServerSession(auth);
+  console.log("auth sess", session);
 
-  if (!session) {
-    redirect("/dashboard/login");
-  }
+  // if (!session) {
+  //   redirect("/dashboard/login");
+  // }
   return <IssueForm />;
 };
 

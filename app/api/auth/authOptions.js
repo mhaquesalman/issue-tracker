@@ -15,12 +15,19 @@ const authOptions = {
             where: { email: credentials.email },
           });
 
+          console.log("user response ", user);
           if (user) {
             const hashedPassword = await bcrypt.compare(
               credentials.password,
               user.password
             );
-            if (hashedPassword) return { id: user.id, email: user.email };
+            if (hashedPassword)
+              return {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                role: user.role,
+              };
             else return null;
           } else {
             throw Error("User not found");
@@ -38,10 +45,10 @@ const authOptions = {
       return true;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      // console.log("jwt ", token);
       if (user) {
         // passing id to the session via token
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
@@ -49,7 +56,9 @@ const authOptions = {
       if (token) {
         session.user.id = token.id;
         session.user.jti = token.jti;
+        session.user.role = token.role;
       }
+      // console.log("callbacks session ", session);
       return session;
     },
   },
